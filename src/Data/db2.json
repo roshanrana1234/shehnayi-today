@@ -1,0 +1,74 @@
+[
+  {
+    "title": "Site Settings",
+    "icons": "Icon",
+    "children": [
+      {
+        "title": "Logo & Favicon"
+      },
+      {
+        "title": "Matri Prefix"
+      },
+      {
+        "title": "Email"
+      },
+      {
+        "title": "Basic Site Settings"
+      },
+      {
+        "title": "Seo Page Data"
+      },
+      {
+        "title": "Social Media Link"
+      },
+      {
+        "title": "Google Analytics Code"
+      },
+      {
+        "title": "Change Password"
+      },
+      {
+        "title": "Currency Management"
+      },
+      {
+        "title": "App Link"
+      },
+      {
+        "title": "HomePage Text"
+      },
+      {
+        "title": "HomePage Banner & Text"
+      },
+      {
+        "title": "Reason why Choose"
+      },
+      {
+        "title": "Generate  Sitemap"
+      }
+    ]
+  },
+  {
+    "title": "Add New Details",
+    "icons": "AiFillSetting",
+    "children": [
+      { "title": "Religion" },
+      { "title": "Caste" },
+      { "title": "Country" },
+      { "title": "State" },
+      { "title": "City" },
+      { "title": "Occupaction" },
+      { "title": "Education" },
+      { "title": "Mother Tongue" },
+      { "title": "Designation" },
+      { "title": "Moonsing" },
+      { "title": "FAQs" },
+      { "title": "Mobile Matri Banner" },
+      { "title": "Matrinony Data" }
+    ]
+  },
+  {
+    "title": "Member",
+    "icons": "AiFillSetting",
+    "children": [{ "title": "All member" }]
+  }
+]
