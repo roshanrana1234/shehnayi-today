@@ -37,10 +37,12 @@ import SendBulkNotification from './MenuItems/SendBulkNotification/SendBulkNotif
 import Advertisement from './MenuItems/Advertisement/Advertisement';
 import UserAnalysis from './MenuItems/User Analysis/UserAnalysis';
 import DataBaseBackup from './MenuItems/Database Backup/DataBaseBackup';
-
-
+import { UseLogOut } from '../Hooks/UseData';
+import { useNavigate } from 'react-router-dom';
+import { removeTokenAdmine } from './Login/LocalStoarege';
 
 const Main = () => {
+    const navigate = useNavigate()
     const [Active, setActive] = useState(false)
     const [open, setOpen] = useState(true)
     const [response, setResponse] = useState({})
@@ -62,6 +64,14 @@ const Main = () => {
     }, [])
 
 
+    const { mutate } = UseLogOut()
+
+    const handleLogout = () => {
+        let out = ''
+        mutate(out)
+        navigate("/login")
+        removeTokenAdmine()
+    }
 
 
     return (
@@ -104,9 +114,7 @@ const Main = () => {
                             <Link to='dashitem' >
                                 <DashMenu data={open} />
                             </Link>
-                            <Link to="setting" >
-                                <SiteSetting data={open} />
-                            </Link>
+                            <SiteSetting data={open} />
                             <Link to="new_detail">
                                 <AddNewDetail data={open} />
                             </Link>
@@ -164,7 +172,7 @@ const Main = () => {
                             {/* Admin  */}
                             <div
                                 onClick={() => setAdmin(!Admin)}
-                                className='absolute left-[100%] -translate-x-[100%] text-xl hidden lg:block'>
+                                className='absolute left-[100%] -translate-x-[100%] text-xl hidden lg:block z-20'>
                                 <div className='flex items-center gap-3 text-[#474747] hover:bg-[#f8f8f8] p-4 rounded-sm cursor-pointer' >
 
                                     <span
@@ -175,8 +183,7 @@ const Main = () => {
                                 </div>
 
                                 {/* Onclick Page */}
-                                <div className={`absolute left-full -translate-x-[198px] top-full w-44 h-22 bg-[#ffffff]  items-center  text-[#747474] text-sm p-2
-                                 border ${Admin ? "hidden" : 'lg:flex'}`}>
+                                <div className={`absolute left-full -translate-x-[198px] top-full w-44 h-22 bg-[#ffffff]  items-center  text-[#747474] text-sm p-2  border ${Admin ? "hidden" : 'lg:flex'}`}>
                                     <ul className='flex flex-col' >
                                         <Link
                                             to="setting" className='hover:bg-[#f8f8f8] p-1' >
@@ -191,9 +198,13 @@ const Main = () => {
                                         <a
                                             target="_blank"
                                             className='hover:bg-[#f8f8f8] p-1'
-                                            href="https://shehnayi.in">Front End</a>
+                                            href="https://shehnayi.in">
+                                            Front End
+                                        </a>
 
-                                        <li className='hover:bg-[#f8f8f8] p-1'>
+                                        <li
+                                            onClick={handleLogout}
+                                            className='hover:bg-[#f8f8f8] p-1'>
                                             <a href="#">LogOut</a>
                                         </li>
                                     </ul>
@@ -207,7 +218,7 @@ const Main = () => {
 
                         {/* Main Content */}
                         <div className='bg-[#F0F0F0] 
-                        h-screen overflow-auto p-5' >
+                        h-screen overflow-auto p-5 ' >
                             <Outlet />
                         </div>
 

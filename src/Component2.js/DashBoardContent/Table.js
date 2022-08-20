@@ -4,7 +4,6 @@ import DataTable from 'react-data-table-component'
 
 const Table = ({ response }) => {
 
-    console.log(response);
 
     const colunms = [
         {
@@ -25,11 +24,11 @@ const Table = ({ response }) => {
         },
         {
             name: "Marital Status",
-            selector: row => row.BasicInformation.maritalStatus
+            selector: row => row.status
         },
         {
             name: "Location",
-            selector: row => row.BasicInformation.city
+            selector: row => row.city
         },
         {
             name: "Registered On",
@@ -40,7 +39,7 @@ const Table = ({ response }) => {
     return (
         <>
             <div className='mt-5' >
-                <DataTable columns={colunms} data={response.foundUsers} />
+                <DataTable columns={colunms} data={response && response.foundUsers} />
             </div>
         </>
     )

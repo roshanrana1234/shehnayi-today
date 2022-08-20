@@ -17,7 +17,7 @@ const Staff = ({ data }) => {
                 <div className={`flex items-center gap-4 p-2  ml-5`}>
                     <BsFillPersonFill className={`${!data && "scale-1.25" && "text-white"} transform`} />
                     <span
-                        className={`${data ? 'lg:block' : "lg:hidden"}`} >
+                        className={`${data ? 'lg:block' : "lg:hidden"}`}>
                         Staff
                     </span>
                 </div>

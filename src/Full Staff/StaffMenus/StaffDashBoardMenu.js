@@ -18,7 +18,7 @@ const StaffDashBoardMenu = ({ data }) => {
                     <AiOutlineDashboard className={`${!data && "scale-1.25" && "text-white"} transform`} />
 
 
-                    <Link to="/Staff_Dashboard"
+                    <Link to="Staff_Dashboard"
                         className={`${data ? 'lg:block' : "lg:hidden"}`} >
                         <a href="#">
                             DashBoard

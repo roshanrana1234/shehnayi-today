@@ -25,18 +25,18 @@ const City = () => {
 
 
     const columns = [
-        {
-            name: "Edit",
-            cell: row => <button
-                onClick={() => alert(row.Religions.map((value, index) => {
-                    console.log(value)
-                }))}
-                className='bg-blue-500  p-3 flex gap-2  flex-shrink-0 w-24 justify-center items-center' >
-                <ImPencil2 />
-                Edit
+        // {
+        //     name: "Edit",
+        //     cell: row => <button
+        //         onClick={() => alert(row.Religions.map((value, index) => {
+        //             console.log(value)
+        //         }))}
+        //         className='bg-blue-500  p-3 flex gap-2  flex-shrink-0 w-24 justify-center items-center' >
+        //         <ImPencil2 />
+        //         Edit
 
-            </button>
-        },
+        //     </button>
+        // },
         {
             name: 'Status',
             selector: row => row && row.State.map((e, i) => {

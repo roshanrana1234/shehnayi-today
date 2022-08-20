@@ -90,6 +90,41 @@ import StateEdit from './Component2.js/MenuItems/AddNewDetail/Edit/StateEdit'
 import StaffPanel from './Full Staff/StaffPanel/StaffPanel'
 import StaffLogin from './Full Staff/Login.js/StaffLogin'
 import StaffDashBoardContent from './Full Staff/StaffMenus/StaffDashboard/StaffDashBoardContent'
+import StaffMember from './Full Staff/StaffMenus/Member/StaffMember'
+import StaffAllMember from './Full Staff/StaffMenus/Member/MemberContents/StaffAllMember'
+import StaffAdvanceSearch from './Full Staff/StaffMenus/Member/MemberContents/StaffAdvanceSearch'
+import StaffActivetoPaid from './Full Staff/StaffMenus/Member/MemberContents/StaffActivetoPaid'
+import StaffManualProfileMatchMaking from './Full Staff/StaffMenus/MatchMaking/ManualProfileMatch Making/StaffManualProfileMatchMaking'
+import StaffLeadGenerationContent from './Full Staff/StaffMenus/LeadGeneration.js/LeadGenerationjContent/StaffLeadGenerationContent'
+import StaffLeadGeneration from './Full Staff/StaffMenus/LeadGeneration.js/StaffLeadGeneration'
+import StaffLeadFollowupDateReport from './Full Staff/StaffMenus/LeadGeneration.js/LeadGenerationjContent/StaffLeadFollowupDateReport'
+import StaffAssignmentReportContent from './Full Staff/StaffMenus/AssgnmentReport.js/Assignment Report of Staff/StaffAssignmentReportContent'
+import LeadGeneratonAssignedToMe from './Full Staff/StaffMenus/AssgnmentReport.js/Assignment Report of Staff/LeadGeneratonAssignedToMe'
+import StaffMemberReport from './Full Staff/StaffMenus/FollowUpSystme/StaffFollowUp/StaffMemberReport'
+import StaffLeadGenerationReport from './Full Staff/StaffMenus/FollowUpSystme/StaffFollowUp/StaffLeadGenerationReport'
+import StaffSendBulkEmail from './Full Staff/StaffMenus/SendBulkEmail And SMS/Send Bulk Email and SMS Staff/StaffSendBulkEmail'
+import StaffBulkEmailandSms from './Full Staff/StaffMenus/SendBulkEmail And SMS/StaffBulkEmailandSms'
+import StaffSendBulkSMS from './Full Staff/StaffMenus/SendBulkEmail And SMS/Send Bulk Email and SMS Staff/StaffSendBulkSMS'
+import StaffIDProof from './Full Staff/StaffMenus/Approval/Staff Approval/StaffIDProof'
+import StaffPhoto1 from './Full Staff/StaffMenus/Approval/Staff Approval/StaffPhoto1'
+import StaffPhoto2 from './Full Staff/StaffMenus/Approval/Staff Approval/StaffPhoto2'
+import StaffPhoto3 from './Full Staff/StaffMenus/Approval/Staff Approval/StaffPhoto3'
+import StaffPhoto4 from './Full Staff/StaffMenus/Approval/Staff Approval/StaffPhoto4'
+import StaffPhoto5 from './Full Staff/StaffMenus/Approval/Staff Approval/StaffPhoto5'
+import StaffPhoto6 from './Full Staff/StaffMenus/Approval/Staff Approval/StaffPhoto6'
+import Online from './Full Staff/StaffMenus/Online/Online'
+import EmailTemplates from './Component2.js/MenuItems/Email Templates/EmailTemplates'
+import AddEmailTemplates from './Component2.js/MenuItems/Email Templates/Add Email Templates/AddEmailTemplates'
+import SMSTemplatePage from './Component2.js/MenuItems/SMS Templates/SMSTemplate/SMSTemplatePage'
+import FAQsDelete from './Component2.js/MenuItems/AddNewDetail/AddNewDatailItem/Delete/FAQsDelete'
+import FAQsEdit from './Component2.js/MenuItems/AddNewDetail/Edit/FAQsEdit'
+import PopUpPage from './PopUp/PopUpPage'
+import PageToggles from './PagesToggle/PageToggles'
+import PopUpFreshTask from './PopUp/PopUpFreshTask'
+import StaffMemberAssignedToMe from './Full Staff/StaffMenus/AssgnmentReport.js/Assignment Report of Staff/StaffMemberAssignedToMe'
+import Flex from './Flex'
+import PopUpFollowUp from './PopUp/PopUpFollowUp'
+import SuspendedMember from './Component2.js/MenuItems/Member/MemberItems/SuspendedMember'
 
 // npx json-server --watch data/db.json --port 8000
 
@@ -99,24 +134,52 @@ const App = () => {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <NavBar />
 
+        <NavBar />
 
         <Routes>
           <Route path='filter' element={<Filter />} />
-
           <Route exact path='test' element={<Text />} />
-
-
           <Route exact path='/' element={<Home />} />
+          {/* PopUps */}
+          <Route exact path='/staff_panel_page/Staff_Lead_followup_date_report/:PopId' element={<PopUpFollowUp />} />
 
+
+          {/* Staff All files route Start */}
           <Route exact path='staff_panel' element={<StaffLogin />} />
           <Route exact path='staff_panel_page' element={<StaffPanel />
-          }
-          >
-            <Route exact path='Staff_Dashboard' element={<StaffDashBoardContent />} />
+          } >
+            <Route exact path='Staff_all_member' element={<StaffAllMember />} />
+            <Route exact path='Staff_Active_to_paid' element={<StaffActivetoPaid />} />
+            <Route exact path='Staff_advance_search' element={<StaffAdvanceSearch />} />
+            <Route exact path='Staff_manual_profile_file_match_making' element={<StaffManualProfileMatchMaking />} />
+            <Route exact path='Staff_LeadGeneration' element={<StaffLeadGenerationContent />} />
+            <Route exact path='Staff_Lead_followup_date_report' element={<StaffLeadFollowupDateReport />} />
 
+            {/* <Route exact path='/staff_panel_page/Staff_Lead_followup_date_report/:PopId' element={<PopUpFollowUp />} /> */}
+
+
+            <Route exact path='Staff_Member_Assigned_to_Me' element={<StaffMemberAssignedToMe />} />
+            <Route exact path='Staff_Generation_assigned_tome' element={<LeadGeneratonAssignedToMe />} />
+            <Route exact path='Staff_member_report' element={<StaffMemberReport />} />
+            <Route exact path='Staff_Lead_generation_report' element={<StaffLeadGenerationReport />} />
+            <Route exact path='Staff_Send_buld_email' element={<StaffSendBulkEmail />} />
+            <Route exact path='Staff_bulk_email_sms' element={<StaffSendBulkSMS />} />
+            <Route exact path='Staff_ID_Proff' element={<StaffIDProof />} />
+            <Route exact path='Staff_horoscope' element={<Horoscope />} />
+            <Route exact path='Staff_Photo1' element={<StaffPhoto1 />} />
+            <Route exact path='Staff_Photo2' element={<StaffPhoto2 />} />
+            <Route exact path='Staff_Photo3' element={<StaffPhoto3 />} />
+            <Route exact path='Staff_Photo4' element={<StaffPhoto4 />} />
+            <Route exact path='Staff_Photo5' element={<StaffPhoto5 />} />
+            <Route exact path='Staff_Photo6' element={<StaffPhoto6 />} />
+            <Route exact path='Staff_Online' element={<Online />} />
+
+
+
+            <Route exact path='Staff_Dashboard' element={<StaffDashBoardContent />} />
           </Route>
+          {/* Staff All files route End */}
 
 
 
@@ -146,9 +209,12 @@ const App = () => {
             {/* Add New Detail Start Here */}
             <Route exact path='new_detail' element={<Religion />} />
             <Route exact path='religion' element={<Religion />} />
-            <Route exact path='/dash/religion/edit/:RId' element={<ReligionEdit />} />
+            {/* <Route exact path='/dash/religion/edit/:RId' element={<ReligionEdit />} /> */}
             <Route exact path={`/dash/religion/CasteEdit/:CId`} element={<CasteEdit />} />
             <Route exact path={`/dash/religion/StateEdit/:SId`} element={<StateEdit />} />
+            {/* <Route exact path={`/dash/FAQs/delete/:FId`} element={<FAQsDelete />} /> */}
+            <Route exact path={`/dash/FAQs/edit/:FId`} element={<FAQsEdit />} />
+
 
             <Route exact path='/dash/religion/delete/:RDId' element={<ReligionDelete />} />
 
@@ -174,6 +240,7 @@ const App = () => {
             <Route path='/dash/all_member/add_data' element={<AddNew />} />
             <Route exact path='all_member' element={<AllMember />} />
             <Route exact path='unapproved' element={<UnApprovedmember />} />
+            <Route exact path='suspended' element={<SuspendedMember />} />
             <Route exact path='approved_paid' element={
               <ApprovedToPaidMember />} />
             <Route exact path='paid_spot' element={
@@ -280,6 +347,18 @@ const App = () => {
             {/* BlogManagement */}
             <Route exact path='blog_management' element={<BlogManagementPage />} />
             {/* BlogManagement */}
+
+            {/* Email Templates */}
+            <Route exact path='email_templates' element={<AddEmailTemplates />
+            } />
+            {/* Email Templates */}
+
+            {/* SMS Template */}
+
+            <Route exact path='sms_template_page' element={<SMSTemplatePage />} />
+
+            {/* SMS Template */}
+
 
           </Route>
 

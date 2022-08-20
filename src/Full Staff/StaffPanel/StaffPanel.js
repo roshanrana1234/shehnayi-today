@@ -1,22 +1,54 @@
 import React, { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 import { GrUserAdmin } from "react-icons/gr";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { BsArrowLeftShort } from "react-icons/bs";
 import StaffDashboard from "../StaffDashboard/StaffDashboard";
 import StaffDashBoardMenu from "../StaffMenus/StaffDashBoardMenu";
-
+import StaffMember from "../StaffMenus/Member/StaffMember";
+import StaffMatchMaking from "../StaffMenus/MatchMaking/StaffMatchMaking";
+import StaffLeadGeneration from "../StaffMenus/LeadGeneration.js/StaffLeadGeneration";
+import StaffAssignmentReport from "../StaffMenus/AssgnmentReport.js/StaffAssignmentReport";
+import StaffFollowupSystme from "../StaffMenus/FollowUpSystme/StaffFollowupSystme";
+import StaffApproval from "../StaffMenus/Approval/StaffApproval";
+import StaffBulkEmailandSms from "../StaffMenus/SendBulkEmail And SMS/StaffBulkEmailandSms";
+import SraffSideBarMenu from "../../Component2.js/StaffSideBarMenu";
+import Online from "../StaffMenus/Online/Online";
+import { UsegetStaffData, UseLogOutStaff } from "../../Hooks/UseStaff";
+import { useSelector } from "react-redux/es/exports";
+import freshStaffSlice from "../../features/freshStaffSlice";
+import { useNavigate } from "react-router-dom";
+import { removeTokenStaff } from "../localstorage";
 
 const StaffPanel = () => {
+
+    let navigate = useNavigate()
     const [Active, setActive] = useState(false)
     const [open, setOpen] = useState(true)
-    const [response, setResponse] = useState({})
-    const [Admin, setAdmin] = useState(true)
+    const [response, setResponse] = useState("")
+    const [Admin, setAdmin] = useState(false)
+
+    const { data } = UsegetStaffData()
+
+    const staff = useSelector((state) => state.staff)
+
+
+
+    const { mutate } = UseLogOutStaff()
+
+    const handleLogOut = () => {
+        mutate(data)
+        navigate("/staff_panel")
+        removeTokenStaff()
+    }
+
+
 
     return (
         <>
-            <div className='  h-screen overflow-hidden ' >
+            <div
+                className='  h-screen overflow-hidden ' >
 
                 <div className='w-full h-screen bg-[#f0f0f0] relative lg:flex box-border  ' >
 
@@ -43,26 +75,35 @@ const StaffPanel = () => {
                                 onClick={() => setOpen(!open)}
                                 className={
                                     `bg-white text-purple-500 rounded-full text-3xl absolute -right-3 top-9 border cursor-pointer 
-                            ${!open && "rotate-180"} lg:block hidden`
+                            ${!open && "rotate-180"} lg:block hidden border-gray-600`
                                 } />
                         </div>
+
+
 
 
 
                         {/* Links */}
                         <div
                             className={`h-full flex-col overflow-auto flex ${!open && "lg:gap-3"}  bg-[#495469] pb-10`} >
-                            <StaffDashBoardMenu data={open} />
-                            <StaffDashboard />
+                            <Online data={open} />
+                            <SraffSideBarMenu data={open} />
+                            <Link to="/staff_panel_page/Staff_Dashboard" >
+
+
+                                <StaffDashBoardMenu data={open} />
+                            </Link>
+
+                            <StaffMember data={open} />
+                            <StaffMatchMaking data={open} />
+                            <StaffLeadGeneration data={open} />
+                            <StaffAssignmentReport data={open} />
+                            <StaffFollowupSystme data={open} />
+                            <StaffApproval data={open} />
+                            <StaffBulkEmailandSms data={open} />
                         </div>
 
-
                     </nav>
-
-
-
-
-
 
                     {/* Right Side Header  */}
                     <div className='relative z-0 lg:grow' >
@@ -83,13 +124,14 @@ const StaffPanel = () => {
 
                             {/* Admin  */}
                             <div
+
                                 onClick={() => setAdmin(!Admin)}
-                                className='absolute left-[100%] -translate-x-[100%] text-xl hidden lg:block'>
+                                className='absolute left-[100%] -translate-x-[100%] text-xl hidden lg:block z-20'>
                                 <div className='flex items-center gap-3 text-[#474747] hover:bg-[#f8f8f8] p-4 rounded-sm cursor-pointer' >
 
                                     <span
                                         className='text-sm'
-                                    >Admin
+                                    >Khushboo
                                     </span>
                                     <GrUserAdmin />
                                 </div>
@@ -97,34 +139,42 @@ const StaffPanel = () => {
 
 
                                 {/* Onclick Page */}
-                                <div className={`absolute left-full -translate-x-[198px] top-full w-44 h-22 bg-[#ffffff]  items-center  text-[#747474] text-sm p-2
-                                 border ${Admin ? "hidden" : 'lg:flex'} z-50`}>
-                                    <ul className='flex flex-col' >
-                                        <Link
-                                            to="setting" className='hover:bg-[#f8f8f8] p-1' >
-                                            <a href="#">Setting</a>
-                                        </Link>
-                                        <Link
-                                            to="changepassword"
-                                            className='hover:bg-[#f8f8f8] p-1'>
-                                            <a href="#">Change Password</a>
-                                        </Link>
+                                <div
 
-                                        <a
-                                            target="_blank"
-                                            className='hover:bg-[#f8f8f8] p-1'
-                                            href="https://shehnayi.in">Front End</a>
+                                >
+                                    <div className={`absolute left-full -translate-x-[198px] top-full w-44 h-22 bg-[#ffffff]  items-center  text-[#747474] text-sm p-2
+                                 border ${!Admin ? "hidden" : 'lg:flex'} z-50`}>
+                                        <ul className='flex flex-col' >
+                                            <Link
+                                                to="changepassword"
+                                                className='hover:bg-[#f8f8f8] p-1'>
+                                                <a href="#">Change Password</a>
+                                            </Link>
 
-                                        <li className='hover:bg-[#f8f8f8] p-1'>
-                                            <a href="#">LogOut</a>
-                                        </li>
-                                    </ul>
+                                            <a
+                                                target="_blank"
+                                                className='hover:bg-[#f8f8f8] p-1'
+                                                href="https://shehnayi.in">Front End</a>
+
+                                            <li
+                                                onClick={handleLogOut}
+                                                className='hover:bg-[#f8f8f8] p-1'>
+                                                <a href="#">LogOut</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
 
                             </div>
-
-
                         </header>
+
+
+                        {/* Outlet */}
+                        <div className='bg-[#F0F0F0] 
+                        h-screen overflow-auto p-5' >
+                            <Outlet />
+                        </div>
+
                     </div>
 
                 </div>

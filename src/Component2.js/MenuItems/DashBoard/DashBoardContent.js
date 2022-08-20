@@ -3,39 +3,36 @@ import First from '../../DashBoardContent/First'
 import Payments from '../../DashBoardContent/Payments'
 import Table from '../../DashBoardContent/Table'
 import Three from '../../DashBoardContent/Three'
-import instance from '../../../Axio'
-import { UseData } from '../../../Hooks/UseData'
-
+import { UseGetAdimine } from '../../../Hooks/UseData'
 
 const DashBoardContent = () => {
     const [response, setResponse] = useState({})
-    // const { data } = UseData()
-    // console.log(data);
-    // console.log(data.data);
+    // console.log(response);
 
-
-    useEffect(() => {
-        async function fetchMyAPI() {
-            try {
-                console.log('Fetched');
-                const res = await instance("/api/v2/admin/dashboard")
-                console.log(res.data);
-                setResponse(res.data)
-                console.log(response);
-
-            } catch (error) {
-
-            }
+    const onSuccess = (data) => {
+        if (data) {
+            setResponse(data.data)
         }
-        fetchMyAPI()
-    }, [])
+    }
 
+    const { isLoading, isError, error, data } = UseGetAdimine(onSuccess)
 
+    if (isLoading) {
+        return <div>Loading...</div>
+    }
+    if (isError) {
+        return <div>{error.message}</div>
+    }
+
+    // useEffect(() => {
+    //     const unsubscribe = navigate.addListener('focus', () => {
+    //         alert('Refreshed');
+    //     });
+    //     return unsubscribe;
+    // }, [navigate]);
 
     return (
         <>
-
-
             <First response={response} />
             <Payments response={response} />
             <Three response={response} />
@@ -45,8 +42,6 @@ const DashBoardContent = () => {
                 @Copyright 2022 By shehnayi.com. All Rights Reserved
 
             </div>
-
-
 
         </>
     )

@@ -53,6 +53,11 @@ const MemberMenu = ({ data }) => {
                         className='hover:text-white pt-2 ' >
                         <a href="#">Paid To spot Lite</a>
                     </Link>
+                    <Link
+                        to="suspended"
+                        className='hover:text-white pt-2 ' >
+                        <a href="#">Suspended Member</a>
+                    </Link>
 
 
                 </ul>

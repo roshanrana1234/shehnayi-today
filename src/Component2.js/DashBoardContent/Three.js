@@ -1,36 +1,104 @@
 import React from 'react'
-import data from '../../Data/db.3.json'
+import { GiHamburgerMenu } from "react-icons/gi";
 const Three = () => {
     return (
         <>
             <div className='grid gap-5 lg:grid-cols-4  text-gray-500  pt-5' >
-                {
-                    data.map((value, index) => {
-                        return <div key={index}
-                            className="bg-[#ffffff] p-2 shadow-md"
-                        >
-                            <div className='flex gap-4 items-center ' >
 
-                                <div className='h-12 w-12 ' >
-                                    <img
-                                        className='h-full w-full rounded-full'
-                                        src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGVuc3xlbnwwfHwwfHw%3D&w=1000&q=80" alt="" />
-                                </div>
+                <div
+                    className="bg-[#ffffff] p-2 shadow-md"
+                >
+                    <div className='flex gap-4 items-center ' >
 
-                                <div className='flex 
+                        <div className='h-12 w-12 ' >
+                            <GiHamburgerMenu className='h-full w-full rounded-full bg-green-600 text-white p-3' />
+                        </div>
+
+                        <div className='flex 
                                flex-col ' >
-                                    <div className='text-xl' >
-                                        {value.num}
-                                    </div>
-                                    <div className='text-sm' >
-                                        {value.text}
-                                    </div>
-                                </div>
-
+                            <div className='text-xl' >
+                                0
+                            </div>
+                            <div className='text-sm' >
+                                Total Vendors
                             </div>
                         </div>
-                    })
-                }
+
+                    </div>
+                </div>
+
+
+
+                <div
+                    className="bg-[#ffffff] p-2 shadow-md"
+                >
+                    <div className='flex gap-4 items-center ' >
+
+                        <div className='h-12 w-12 ' >
+                            <GiHamburgerMenu className='h-full w-full rounded-full bg-green-600 text-white p-3' />
+                        </div>
+
+                        <div className='flex 
+                               flex-col ' >
+                            <div className='text-xl' >
+                                5
+                            </div>
+                            <div className='text-sm' >
+                                Success Plans
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+                <div
+                    className="bg-[#ffffff] p-2 shadow-md"
+                >
+                    <div className='flex gap-4 items-center ' >
+
+                        <div className='h-12 w-12 ' >
+                            <GiHamburgerMenu className='h-full w-full rounded-full bg-green-600 text-white p-3' />
+                        </div>
+
+                        <div className='flex 
+                               flex-col ' >
+                            <div className='text-xl' >
+                                2
+                            </div>
+                            <div className='text-sm' >
+                                MemberShip Plans
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+                <div
+                    className="bg-[#ffffff] p-2 shadow-md"
+                >
+                    <div className='flex gap-4 items-center ' >
+                        <div className='h-12 w-12 ' >
+                            <GiHamburgerMenu className='h-full w-full rounded-full bg-green-600 text-white p-3' />
+                        </div>
+
+                        <div className='flex 
+                               flex-col ' >
+                            <div className='text-xl' >
+                                0
+                            </div>
+                            <div className='text-sm' >
+                                Advertisement
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </>
     )

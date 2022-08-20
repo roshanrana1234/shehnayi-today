@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import { UsegetEmail, UsePostEmail } from '../../../../Hooks/UseData'
-import { mutate } from '@tanstack/react-query'
+import { UsePostEmail } from '../../../../Hooks/UseData'
 
-// emailFrom
 
 const Email = () => {
     const [emailFrom, setEmailFrom] = useState('');
@@ -15,7 +13,10 @@ const Email = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(emailFrom, emailTo);
-        const mail = { emailFrom, setEmailFrom }
+        const mail = {
+            "emailFrom": emailFrom,
+            "emailTo": emailTo
+        }
         mutate(mail)
     }
 
@@ -59,11 +60,7 @@ const Email = () => {
                             className='text-white p-2 bg-[#0099CC] hover:bg-blue-600' >
                             <button>Submit</button>
                         </div>
-                        <div
-                            className=' p-2 border hover:bg-slate-500 hover:text-white'
-                        >
-                            <button>Back</button>
-                        </div>
+
                     </div>
 
                 </form>

@@ -42,25 +42,25 @@ const Caste = () => {
     }
 
     const columns = [
-        {
-            name: "Edit",
-            cell: row =>
-                <Link to={`/dash/religion/CasteEdit/${row._id}`} >
-                    <button
-                        onClick={() => setOpen(!open)}
-                        className='bg-blue-500  p-3 flex gap-2  text-white flex-shrink-0 w-24 justify-center items-center' >
-                        <ImPencil2 />
-                        Edit
+        // {
+        //     name: "Edit",
+        //     cell: row =>
+        //         <Link to={`/dash/religion/CasteEdit/${row._id}`} >
+        //             <button
+        //                 onClick={() => setOpen(!open)}
+        //                 className='bg-blue-500  p-3 flex gap-2  text-white flex-shrink-0 w-24 justify-center items-center' >
+        //                 <ImPencil2 />
+        //                 Edit
 
-                    </button>
-                </Link>
-        },
+        //             </button>
+        //         </Link>
+        // },
         {
             name: "Delete",
             cell: row => (
                 <button
                     onClick={() => deleteUser(row._id)}
-                    className='bg-[#FF5858]  p-3 flex gap-2  flex-shrink-0 w-24 justify-center items-center text-white' >
+                    className='bg-[#FF5858] rounded-lg p-3 flex gap-2  flex-shrink-0 w-24 justify-center items-center text-white' >
                     <AiFillDelete />
                     Delete
 

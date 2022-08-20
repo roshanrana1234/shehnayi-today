@@ -1,75 +1,123 @@
 import React from 'react'
 import { useState } from 'react'
-import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
-import { PostLoginData } from '../../Hooks/UseData';
 import img from '../../images/shehnayilogo.svg'
-import { Link } from 'react-router-dom';
-var qs = require('qs');
+import { UseLoginStaff } from '../../Hooks/UseStaff';
+import { storeTokenStaff } from '../localstorage'
+
 
 
 const StaffLogin = () => {
     const navigate = useNavigate();
-
     const [username, setUsename] = useState("")
     const [password, setPassword] = useState("")
 
-    const { mutate } = PostLoginData()
+    const onSuccess = (data) => {
+        if (data.status === 200) {
+            toast.success("Sucessful Login", { position: "top-center" })
+            setTimeout(() => {
+                navigate("/staff_panel_page")
+            }, 1000);
+        }
+    }
 
-    var data = qs.stringify({
-        'username': username,
-        'password': password
-    });
+
+    const onError = () => {
+        //alert('Login error')
+    }
+    const { mutate, data } = UseLoginStaff(onSuccess, onError)
+    console.log(data);
+    if (data) {
+        if (data.data) {
+            storeTokenStaff(data.data.token)
+        }
+
+    }
 
 
 
     const submitHandler = (e) => {
         e.preventDefault();
-        var config = {
-            method: 'post',
-            url: 'https://server.shehnayi.in/api/v2/admin/login',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            data: data
-        };
-
-        axios(config)
-            .then(function (response) {
-                console.log(JSON.stringify(response.data));
-                if (response.status === 200) {
-                    toast.success("Sucessful Login", { position: "top-center" })
-
-                    setTimeout(() => {
-                        navigate("/dash")
-                    }, 3000);
-
-
-                }
-
-
-
-            })
-            .catch(function (error) {
-                if (error) {
-                    toast.error(error.response.data, {
-                        position: "top-right"
-                    })
-                }
-            });
+        const data = { username, password }
+        mutate(data)
+        navigate("/staff_panel_page/Staff_Dashboard")
 
     }
 
+    // const submitHandler = (e) => {
+    //     e.preventDefault();
+    //     var config = {
+    //         method: 'post',
+    //         url: 'https://server.shehnayi.in/api/v2/admin/staffLogin',
+    //         headers: {
+    //             'Content-Type': 'application/x-www-form-urlencoded',
+    //             // 'Cookie': 'connect.sid=s%3AULbj9n_Q4E8dsX_AcfFrseRygCihwtP8.yFexD13J4i8A5Vw5a8OZE2JIw7KrtutE9pDVNLVCs%2FM'
+    //         },
+    //         data: data
+
+
+    //     };
+
+    //     axios(config)
+    //         .then(function (response) {
+    //             console.log(JSON.stringify(response.data));
+    //             if (response.status === 200) {
+
+    //                 console.log(response)
+    //                 setRes(response)
+    //                 response && response.data && response.data.foundUser && response.data.foundUser.tokens?.map((e) => {
+    //                     console.log(e.token);
+
+    //                     storeToken(e.token)
+
+
+    //                 });
+
+    //                 // storeToken(response)
+    //                 toast.success("Sucessful Login", { position: "top-center" })
+
+    //                 setTimeout(() => {
+    //                     navigate("/staff_panel_page")
+
+    //                 }, 3000);
+
+
+    //             }
+
+    //         })
+    //         .catch(function (error) {
+    //             if (error) {
+    //                 toast.error(error.response.data, {
+    //                     position: "top-right"
+    //                 })
+    //             }
+    //         });
+
+    // }
+
+
+
+    // useEffect(() => {
+
+    //     if (res) {
+    //         dispactch(setResInfo({
+    //             res: res.data
+    //         }))
+    //     }
+
+    // }, [res]);
+
+
     return (
         <>
-            <div className='max-w-sm m-auto mt-20' >
+            <div className='max-w-sm m-auto mt-10' >
                 <div className='flex flex-col items-center gap-6 my-6' >
                     <div
                         className=' flex justify-center w-full h-40'>
                         <img
-                            className='h-full '
+                            className='h-full w-full '
                             src={img} alt="" />
                         {/* Shehnayi */}
                     </div>
@@ -99,18 +147,13 @@ const StaffLogin = () => {
                         </button>
 
                         <div
-                            className='text-sm text-gray-500'
+
+                            className='text-sm text-gray-500 cursor-pointer'
                         >Forget Your password?</div>
                     </div>
                 </form>
 
-                <div>
-                    <Link to="/staff_panel_page" >
-                        <button className='text-2xl bg-blue-400 rounded-xl p-4' >
-                            Go Staff Pannel
-                        </button>
-                    </Link>
-                </div>
+
 
             </div>
             <ToastContainer

@@ -4,61 +4,59 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
-import { PostLoginData } from '../../Hooks/UseData';
-import img from '../../images/shehnayilogo.svg'
+import img from '../../images/shehnayilogo.svg';
+import { storeTokenAdmine } from './LocalStoarege';
+import PopUpPage from '../../PopUp/PopUpPage';
+import PopUpForgetPassword from '../../PopUp/PopUpForgetPassword';
+import { UseLogin } from '../../Hooks/UseData'
 var qs = require('qs');
 
 const Login = () => {
+    const [showMyModal, setShowMyModal] = useState(false);
+    const handleOnClose = () => setShowMyModal(false)
+    const [showPasswordPop, setShowPasswordPop] = useState(false);
+    const handleOnClosePass = () => setShowPasswordPop(false)
     const navigate = useNavigate();
 
     const [username, setUsename] = useState("")
     const [password, setPassword] = useState("")
 
-    const { mutate } = PostLoginData()
 
-    var data = qs.stringify({
-        'username': username,
-        'password': password
-    });
+    const onSuccess = (data) => {
+        if (data.status === 200) {
+            toast.success("Sucessful Login", { position: "top-center" })
+            setTimeout(() => {
+                navigate("/dash")
+            }, 1000);
+        }
+
+    }
 
 
+
+
+    const onError = () => {
+        alert('Login error')
+        // console.log('data', data)
+    }
+
+    const { mutate, data } = UseLogin(onSuccess, onError)
+
+    console.log(data);
 
     const submitHandler = (e) => {
         e.preventDefault();
-        var config = {
-            method: 'post',
-            url: 'https://server.shehnayi.in/api/v2/admin/login',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            data: data
-        };
-
-        axios(config)
-            .then(function (response) {
-                console.log(JSON.stringify(response.data));
-                if (response.status === 200) {
-                    toast.success("Sucessful Login", { position: "top-center" })
-
-                    setTimeout(() => {
-                        navigate("/dash")
-                    }, 3000);
-
-
-                }
-
-
-
-            })
-            .catch(function (error) {
-                if (error) {
-                    toast.error(error.response.data, {
-                        position: "top-right"
-                    })
-                }
-            });
-
+        const data = { username, password }
+        mutate(data)
     }
+
+    if (data) {
+        if (data.data) {
+            storeTokenAdmine(data.data.token)
+        }
+    }
+
+
 
     return (
         <>
@@ -96,17 +94,30 @@ const Login = () => {
                             Login
                         </button>
 
-                        <div
-                            className='text-sm text-gray-500'
-                        >Forget Your password?</div>
                     </div>
                 </form>
+
+                <div className='flex justify-between items-center my-4 ' >
+                    <div
+                        onClick={() => setShowPasswordPop(true)}
+                        className='text-sm text-gray-500 cursor-pointer'
+                    >Forget Your password?
+                    </div>
+                    <button
+                        className='text-white bg-green-400 p-3 rounded-lg hover:bg-green-600'
+                        onClick={() => setShowMyModal(true)}                    >
+                        Sign Up
+                    </button>
+                </div>
+
 
             </div>
             <ToastContainer
                 closeOnClick
                 autoClose={2000}
             />
+            <PopUpForgetPassword onClose={handleOnClosePass} visible={showPasswordPop} />
+            <PopUpPage onClose={handleOnClose} visible={showMyModal} />
         </>
     )
 }

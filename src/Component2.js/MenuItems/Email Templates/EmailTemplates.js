@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { IoIosArrowForward } from "react-icons/io";
 import { HiMail } from "react-icons/hi";
-
+import { Link } from 'react-router-dom';
 
 const EmailTemplates = ({ data }) => {
     const [open, setOpen] = useState(false)
@@ -36,9 +36,11 @@ const EmailTemplates = ({ data }) => {
                     <li className='hover:text-white pt-2 ' >
                         <a href="#">Email Templates</a>
                     </li>
-                    <li className='hover:text-white pt-2 ' >
-                        <a href="#">Add Email Templates</a>
-                    </li>
+                    <Link to="email_templates" >
+                        <li className='hover:text-white pt-2 ' >
+                            <a href="#">Add Email Templates</a>
+                        </li>
+                    </Link>
 
                 </ul>
             </div>

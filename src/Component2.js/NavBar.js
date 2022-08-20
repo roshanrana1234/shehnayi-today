@@ -8,6 +8,7 @@ const NavBar = () => {
                     <Link to="test" >Test</Link>
                     <Link to="dash" >DashBoard</Link>
                     <Link to="login" >Login</Link>
+                    <Link to="staff_panel_page" >Staff DashBoard</Link>
                 </nav>
             </div>
             <Outlet />

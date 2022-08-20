@@ -30,7 +30,7 @@ const Religion = () => {
 
     // get data
     const { isLoading, isError, error, data } = AddNewDetails()
-
+    console.log(data);
 
     const onSuccess = () => {
         navigate("/dash/religion")
@@ -57,19 +57,21 @@ const Religion = () => {
 
 
     const columns = [
-        {
-            name: "Edit",
-            cell: row =>
-                <Link to={`/dash/religion/edit/${row._id}`} >
-                    <button
-                        onClick={() => setOpen(!open)}
-                        className='bg-blue-500  p-3 flex gap-2  text-white flex-shrink-0 w-24 justify-center items-center' >
-                        <ImPencil2 />
-                        Edit
+        // {
+        //     name: "Edit",
+        //     cell: row => (
+        //         <Link to={`/dash/religion/edit/${row._id}`} >
+        //             <button
+        //                 onClick={() => setOpen(!open)}
+        //                 className='bg-blue-500  p-3 flex gap-2  text-white flex-shrink-0 w-24 justify-center items-center' >
+        //                 <ImPencil2 />
+        //                 Edit
 
-                    </button>
-                </Link>
-        },
+        //             </button>
+        //         </Link>
+        //     )
+
+        // },
         // {
         //     name: "Delete",
         //     cell: row => (
@@ -87,12 +89,14 @@ const Religion = () => {
             cell: row => (
                 <Link to={`/dash/religion/delete/${row._id}`} >
                     <button
-                        className='bg-[#FF5858]  p-3 flex gap-2  flex-shrink-0 w-24 justify-center items-center text-white' >
+                        className='bg-[#FF5858] rounded-lg p-3 flex gap-2  flex-shrink-0 w-24 justify-center items-center text-white' >
                         <AiFillDelete />
                         Delete
 
                     </button>
-                </Link>)
+                </Link>
+            )
+
         },
 
 
@@ -102,10 +106,10 @@ const Religion = () => {
 
             selector: row => row && row.Religions.map((e) => {
                 return <div>
+                    {console.log(e._id)}
                     {e.ReligionName}
                 </div>
             })
-
 
         },
         {

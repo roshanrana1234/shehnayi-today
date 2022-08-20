@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { IoIosArrowForward } from "react-icons/io";
 import { FcPhoneAndroid } from "react-icons/fc";
-
+import { Link } from 'react-router-dom';
 const SMSTemplates = ({ data }) => {
     const [open, setOpen] = useState(false)
 
@@ -32,9 +32,11 @@ const SMSTemplates = ({ data }) => {
                 ${!data ? 'lg:hidden' : "block"}
                  `}>
                 <ul className='flex flex-col ' >
-                    <li className='hover:text-white pt-2 ' >
-                        <a href="#">SMS Configuration</a>
-                    </li>
+                    <Link to="sms_template_page" >
+                        <li className='hover:text-white pt-2 ' >
+                            <a href="#">SMS Configuration</a>
+                        </li>
+                    </Link>
                     <li className='hover:text-white pt-2 ' >
                         <a href="#">SMS Templates</a>
                     </li>

@@ -19,6 +19,12 @@
     rounded-t-lg border;
   }
 }
+@layer utilities {
+  .active-tabs1 {
+    @apply bg-[#3B77B5]  
+    border text-white font-bold duration-300 border-t-4 border-green-400 rounded-t-md;
+  }
+}
 
 @layer utilities {
   .content {

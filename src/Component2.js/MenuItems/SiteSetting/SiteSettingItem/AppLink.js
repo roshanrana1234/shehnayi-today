@@ -1,19 +1,22 @@
 import React, { useState } from 'react'
-import { UsePostAppLink } from '../../../../Hooks/UseData'
+import { UseAPPLink } from '../../../../Hooks/UseData'
 
 
 // android  ios
 const AppLink = () => {
+    const { mutate } = UseAPPLink()
     const [android, setAndroid] = useState('');
     const [ios, setIos] = useState('');
-    const { mutate } = UsePostAppLink()
 
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(android, ios);
+        const link = {
+            "android": android,
+            "ios": ios
+        }
         mutate(link)
     }
-    const link = { android, ios }
     return (
         <>
             <div className='paper' >
