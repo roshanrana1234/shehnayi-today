@@ -2,7 +2,11 @@ import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios'
+import { UseChangeAdminPassword } from '../Hooks/UseData';
+import { getTokenAdmin } from '../Component2.js/Login/LocalStoarege';
 var qs = require('qs');
+
+const token = getTokenAdmin("token")
 
 const PopUpForgetPassword = ({ visible, onClose }) => {
     const [oldpassword, setOldpassword] = useState("")
@@ -14,6 +18,17 @@ const PopUpForgetPassword = ({ visible, onClose }) => {
     };
     if (!visible) return null;
 
+    // const onSuccess = (data) => {
+    //     if (data.status === 200) {
+    //         toast.success("Sucessful change Password", { position: "top-center" })
+
+    //         setTimeout(() => {
+    //             navigate("/login")
+    //         }, 3000);
+    //     }
+    // }
+
+    // const { mutate } = UseChangeAdminPassword(onSuccess)
 
     var data = qs.stringify({
         'oldpassword': oldpassword,
@@ -22,11 +37,14 @@ const PopUpForgetPassword = ({ visible, onClose }) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        // let data = { oldpassword, password }
+        // mutate(data)
+
         var config = {
             method: 'patch',
             url: 'https://server.shehnayi.in/api/v2/admin/changepass',
             headers: {
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmY3ZjVlNWZmMjYyODc4MDU3MWQyYWIiLCJpYXQiOjE2NjA0ODk0MDh9.fNn-9_MWFjzhBy-Kz-53IJLp3HXDDTziJkt30mDIBso',
+                'Authorization': ` Bearer ${token} `,
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Cookie': 'connect.sid=s%3AjfXjgC9AeHC5_UxvUv_b4Rs9Qbmaaen4.7pyDWYi9VN%2BVLXFwB9iNnAgkWdXUBCyyAQ%2Fz4gF4Eho'
             },
@@ -38,7 +56,7 @@ const PopUpForgetPassword = ({ visible, onClose }) => {
             .then(function (response) {
                 console.log(JSON.stringify(response.data));
                 if (response.status === 200) {
-                    toast.success("Sucessful Login", { position: "top-center" })
+                    toast.success("Sucessful changed", { position: "top-center" })
 
                     setTimeout(() => {
                         navigate("/login")
@@ -102,6 +120,10 @@ const PopUpForgetPassword = ({ visible, onClose }) => {
                     </button>
                 </div>
             </div>
+            <ToastContainer
+                closeOnClick
+                autoClose={2000}
+            />
         </>
     )
 }

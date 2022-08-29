@@ -10,7 +10,8 @@ import { AddNewDetails } from '../../../../../Hooks/UseData';
 
 // Delete
 const DeleteData = ({ RDId }) => {
-    return instance.delete(`/api/v2/admin/add-new-details/${RDId}`)
+    return instance.delete(`api/v2/admin/add-new-details/Religions/${RDId}`)
+
 }
 
 
@@ -25,7 +26,7 @@ const ReligionDelete = () => {
     // }))
 
     let { RDId } = useParams()
-    console.log(RDId);
+    console.log("RDId", RDId);
 
     // Delete
     const { mutate } = useMutation((RDId) => DeleteData(RDId), {

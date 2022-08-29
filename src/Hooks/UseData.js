@@ -71,7 +71,7 @@ export const UsePostEmail = () => {
 // Add New Details / Crete New Details Post
 const postNewDetail = (addmember) => {
 
-    return instance.post('/api/v2/admin/add-new-details', addmember)
+    return instance.post('/api/v2/admin/add-new-details/Caste', addmember)
 }
 
 export const UseCreteNewDetail = (onSuccess, onError) => {
@@ -143,6 +143,14 @@ const PostLogOut = (out) => {
 
 export const UseLogOut = (onSuccess, onError) => {
     return useMutation(PostLogOut, { onSuccess, onError })
+}
+
+const PostAboutUs = (data) => {
+    return request.post('/api/v2/aboutUs', data)
+}
+
+export const UsePostAboutus = (onSuccess, onError) => {
+    return useMutation(PostAboutUs, { onSuccess, onError })
 }
 // Post End Here============================================================
 const fetchEmail = () => {
@@ -257,6 +265,14 @@ export const UseGetSuspended = (onSuccess) => {
         onSuccess
     })
 }
+const GetAboutUs = () => {
+    return request({ url: "/api/v2/about-us" })
+}
+export const UseGetAboutUs = (onSuccess) => {
+    return useQuery(["Admin_Aboutus"], GetAboutUs, {
+        onSuccess
+    })
+}
 // ==============================================================
 // Put
 
@@ -277,3 +293,12 @@ export const UseGetSuspended = (onSuccess) => {
 
 
 //====================================================
+
+// Patch
+const ChangePasswrdAdmin = (data) => {
+    return request.patch('/api/v2/admin/changepass', data)
+}
+
+export const UseChangeAdminPassword = (onSuccess, onError) => {
+    return useMutation(ChangePasswrdAdmin, { onSuccess, onError })
+}

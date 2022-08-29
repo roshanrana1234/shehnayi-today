@@ -9,6 +9,8 @@ import { UseGetMemberUnapproved } from '../../../../Hooks/UseData';
 
 const UnApprovedmember = () => {
     // const [searchTerm, setSearchTerm] = useState(second)
+    const [query, setQuery] = useState('')
+
     const [toggleState, setToggleState] = useState(1)
     const [numofPages, setNumofPages] = useState(7)
     const [showPerPage, setShowPerPage] = useState(numofPages)
@@ -20,10 +22,17 @@ const UnApprovedmember = () => {
 
 
 
-    const [name, setName] = useState("");
-    const [search, setSearch] = useState("");
 
     const { isLoading, data, isError, error } = UseGetMemberUnapproved()
+
+    const keys = ["firstname", "city", "lastname", "religion", "username"]
+
+    let search = (data) => {
+        return data && data?.filter(items => keys?.some((key) => items[key]?.toLowerCase().includes(query)))
+
+    }
+
+
 
     if (data) {
         console.log(data);
@@ -45,8 +54,6 @@ const UnApprovedmember = () => {
         return name
     };
 
-    console.log(name);
-    console.log(search);
 
     if (isLoading) {
         return <h2>Loading</h2>
@@ -68,12 +75,13 @@ const UnApprovedmember = () => {
 
                     <div className='relative' >
                         <input
-                            onChange={(e) => setName(e.target.value)}
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
                             placeholder='Search here...'
                             className=' rounded-md text-sm border p-3 w-full focus:outline-none'
                             type="text" />
 
-                        <button onClick={() => setSearch(name)}
+                        <button
                             className=' absolute top-1/2 -translate-y-1/2 left-full -translate-x-full text-white bg-[#0096c9] p-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 '
                         >
                             <div>
@@ -316,7 +324,7 @@ const UnApprovedmember = () => {
 
                     <div className='my-5 ' >
                         {
-                            data && data.data && data.data.slice(pagination.start, pagination.end).map((value, index) => {
+                            data && search(data.data) && search(data.data).slice(pagination.start, pagination.end).map((value, index) => {
                                 return <div key={index}>
                                     <div className='bg-[#F5F5F5] grid py-4 border shadow-xl' >
                                         <div>

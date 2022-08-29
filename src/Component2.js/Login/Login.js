@@ -46,6 +46,7 @@ const Login = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
+
         const data = { username, password }
         mutate(data)
     }
@@ -79,11 +80,15 @@ const Login = () => {
                     <div className='flex flex-col gap-4'>
 
                         <input
+
+                            required
                             value={username}
                             placeholder="shenhay@gmail.com"
                             onChange={(e) => setUsename(e.target.value)}
                             className='border p-2 border-green-400' type="email" />
+
                         <input
+                            required
                             placeholder='****'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -101,7 +106,7 @@ const Login = () => {
                     <div
                         onClick={() => setShowPasswordPop(true)}
                         className='text-sm text-gray-500 cursor-pointer'
-                    >Forget Your password?
+                    >Change Your password?
                     </div>
                     <button
                         className='text-white bg-green-400 p-3 rounded-lg hover:bg-green-600'

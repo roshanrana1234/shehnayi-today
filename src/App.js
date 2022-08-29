@@ -125,6 +125,7 @@ import StaffMemberAssignedToMe from './Full Staff/StaffMenus/AssgnmentReport.js/
 import Flex from './Flex'
 import PopUpFollowUp from './PopUp/PopUpFollowUp'
 import SuspendedMember from './Component2.js/MenuItems/Member/MemberItems/SuspendedMember'
+import AboutUs from './Component2.js/MenuItems/SiteSetting/SiteSettingItem/AboutUs'
 
 // npx json-server --watch data/db.json --port 8000
 
@@ -203,6 +204,8 @@ const App = () => {
             <Route exact path='home_page_banner_text' element={<HomePageBannerText />} />
             <Route exact path='reason_why_choose' element={<ReasonWhyChoose />} />
             <Route exact path='genetate_site_map' element={<GenerateSiteMap />} />
+            <Route exact path='about_us' element={<AboutUs />} />
+
             {/* SiteSetting End */}
 
 

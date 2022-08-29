@@ -20,7 +20,7 @@ const FAQs = () => {
 
     // get data
     const { data, isLoading, isError, error } = UseFAQs()
-    // console.log(data);
+    console.log(data);
 
     if (isLoading) {
         return <div>Loading...</div>
@@ -37,7 +37,7 @@ const FAQs = () => {
     }
 
     // Post
-    const { mutate } = UseFAQsPost(onSuccess)
+    const { mutate } = UseFAQsPost()
 
     const toggleTab = (index) => {
         setToggleState(index)
@@ -48,7 +48,7 @@ const FAQs = () => {
         {
             name: "Edit",
             cell: row => (
-                <Link to={`/dash/FAQs/edit/${row?._id}`
+                <Link to={`/dash/FAQs/edit/${row && row?._id}`
                 } >
                     <button
                         onClick={() => setOpen(!open)}
@@ -65,7 +65,7 @@ const FAQs = () => {
         {
             name: "Delete",
             cell: row => (
-                <Link to={`/dash/FAQs/delete/${row?._id}`} >
+                <Link to={`/dash/FAQs/delete/${row && row._id}`} >
                     <button
                         className='bg-[#FF5858]  p-3 flex gap-2  flex-shrink-0 w-24 justify-center items-center text-white' >
                         <AiFillDelete />
@@ -78,23 +78,23 @@ const FAQs = () => {
         },
         {
             name: 'Question',
-            selector: row => row?.Question
+            selector: row => row && row.Question
         },
         {
             name: 'Answer',
 
 
-            selector: row => row?.Answer
+            selector: row => row && row.Answer
 
         },
-        {
-            name: 'Assigne Task',
-            selector: row => row.year,
-        },
-        {
-            name: 'Assigne require',
-            selector: row => row.year,
-        },
+        // {
+        //     name: 'Assigne Task',
+        //     selector: row => row.year,
+        // },
+        // {
+        //     name: 'Assigne require',
+        //     selector: row => row.year,
+        // },
     ];
 
     const handlePost = (e) => {
@@ -220,12 +220,20 @@ const FAQs = () => {
 
 
             {/* Header */}
-            <div className='overflow-auto flex gap-10 border p-3 lg:justify-evenly lg:overflow-hidden' >
-                <button
-                    className={toggleState === 1 ? "active-tabs" : "tabs"}
-                    onClick={() => toggleTab(1)}
-                >
-                    All</button>
+            <div className='overflow-auto flex border  lg:justify-evenly lg:overflow-hidden  font-semibold text-gray-500 my-10' >
+                <div className='flex flex-1 flex-col   gap-1 items-center  min-w-[200px]' >
+                    <button
+                        className={`${toggleState === 1 ? "active-tabs1" : "tabs"} w-full p-4 border-x-2`}
+                        onClick={() => toggleTab(1)}
+                    >
+                        <div className='flex flex-col  ' >
+                            ALL
+                            <div>
+                                (  {data && data.data && data.data.length})
+                            </div>
+                        </div>
+                    </button>
+                </div>
 
             </div>
 

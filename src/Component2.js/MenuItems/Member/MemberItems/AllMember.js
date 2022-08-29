@@ -11,25 +11,34 @@ import Pagination from '../../../Pagination/Pagination';
 
 
 const AllMember = () => {
-    // const [searchTerm, setSearchTerm] = useState(second)
+    const [user, setuser] = useState([])
+    const [query, setQuery] = useState('')
     const [toggleState, setToggleState] = useState(1)
-    const [numofPages, setNumofPages] = useState(7)
+    const [numofPages, setNumofPages] = useState(10)
     const [showPerPage, setShowPerPage] = useState(numofPages)
-    console.log(numofPages);
+    // console.log(numofPages);
     const [pagination, setPagination] = useState({
         start: 0,
         end: showPerPage,
     })
-    const [name, setName] = useState("");
-    const [search, setSearch] = useState("");
+
 
     const { data, isLoading, error, isError } = UseGetAllMember()
-
     if (data) {
         console.log(data);
         console.log(data.data);
     }
+    useEffect(() => {
+        setuser(data && data.data)
+    }, [])
 
+    // const keys = ["firstname", "city", "lastname", "username", "religion", "state", "country", "phone"]
+    const keys = ["firstname", "city", "lastname", "religion", "username"]
+
+    let search = (data) => {
+        return data && data?.filter(items => keys?.some((key) => items[key]?.toLowerCase().includes(query)))
+
+    }
     const onPaginationChange = (start, end) => {
         // console.log(start, end);
         setPagination({ start: start, end: end })
@@ -40,14 +49,6 @@ const AllMember = () => {
     }
 
 
-    const Search = (name) => {
-
-        return name
-    };
-
-    console.log(name);
-    console.log(search);
-
     if (isLoading) {
         return <h2>Loading</h2>
     }
@@ -56,7 +57,18 @@ const AllMember = () => {
     }
 
     const handlepages = () => {
-        setNumofPages(numofPages)
+        setShowPerPage(numofPages)
+    }
+    const handleChange = (e) => {
+        const { name, checked } = e.target;
+        if (name === "allSelect") {
+            let tempUser = user.map(value => { return { ...value, isChecked: checked } })
+            setuser(tempUser)
+        } else {
+            let tempUser = user && user.map((value) => value._id === name ? { ...value, isChecked: checked } : value)
+            setuser(tempUser)
+
+        }
     }
 
     return (
@@ -71,12 +83,14 @@ const AllMember = () => {
 
                     <div className='relative' >
                         <input
-                            onChange={(e) => setName(e.target.value)}
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
                             placeholder='Search here...'
                             className=' rounded-md text-sm border p-3 w-full focus:outline-none'
                             type="text" />
 
-                        <button onClick={() => setSearch(name)}
+                        <button
+                            //  onClick={() => setSearch(name)}
                             className=' absolute top-1/2 -translate-y-1/2 left-full -translate-x-full text-white bg-[#0096c9] p-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 '
                         >
                             <div>
@@ -111,7 +125,11 @@ const AllMember = () => {
                 <div className='flex text-gray-500 py-4' >
 
                     <div className='flex gap-4 p-4 rounded-lg border' >
-                        <input type="checkbox" />
+                        <input type="checkbox"
+                            checked={user?.filter(value => value?.isChecked !== true).length < 1}
+                            onChange={handleChange}
+                            name='allSelect'
+                        />
                         <label htmlFor="">Select All</label>
                     </div>
                 </div>
@@ -192,7 +210,7 @@ const AllMember = () => {
                         <span>Show</span>
                         <span>
                             <select
-                                onClick={(e) => setNumofPages(e.target.value)}
+                                onClick={(e) => setShowPerPage(e.target.value)}
                                 className='border'
                                 name="" id="">
                                 <option value="1">1</option>
@@ -319,7 +337,8 @@ const AllMember = () => {
 
                     <div className='my-5 ' >
                         {
-                            data && data.data && data.data.slice(pagination.start, pagination.end).map((value, index) => {
+                            user && search(user) && search(user).slice(pagination.start, pagination.end).map((value, index) => {
+                                {/* data && data.data && data.data.slice(pagination.start, pagination.end).map((value, index) => { */ }
                                 return <div key={index}>
                                     <div className='bg-[#F5F5F5] grid py-4 border shadow-xl' >
                                         <div>
@@ -329,7 +348,11 @@ const AllMember = () => {
 
                                                     <input
                                                         className='border'
-                                                        type="checkbox" />
+                                                        type="checkbox"
+                                                        onChange={handleChange}
+                                                        name={value._id}
+                                                        checked={value?.isChecked || false}
+                                                    />
 
                                                     <div>
 
@@ -340,19 +363,7 @@ const AllMember = () => {
                                                         </div>
 
 
-                                                        <div className='flex gap-4 py-3'>
-                                                            <div
-                                                                className='border p-2 bg-[#ffffff]'
-                                                            >
-                                                                Matri Id
-                                                            </div>
-                                                            <div>
-                                                                <button
-                                                                    className='bg-[#2ECC71] p-2 text-white'
-                                                                >
-                                                                    Mark as Complete</button>
-                                                            </div>
-                                                        </div>
+
                                                     </div>
                                                 </div>
 
@@ -501,7 +512,7 @@ const AllMember = () => {
                                                                 <div
                                                                     className='place-content-center grid '
                                                                 >:</div>
-                                                                <div>{value.username}</div>
+                                                                <div>{value.username}{value.lastname}</div>
                                                             </div>
                                                             <br />
 
@@ -511,8 +522,8 @@ const AllMember = () => {
                                                                 <div
                                                                     className='place-content-center grid'
                                                                 >:</div>
-                                                                <div>not given</div>
-                                                                {/* <div>{value.BasicInformation.country}</div> */}
+
+                                                                <div>{value.country}</div>
                                                             </div>
                                                             <br />
 
@@ -532,8 +543,8 @@ const AllMember = () => {
                                                                 <div
                                                                     className='place-content-center grid'
                                                                 >:</div>
-                                                                <div>not given</div>
-                                                                {/* <div>{value.BasicInformation.city}</div> */}
+
+                                                                <div>{value.city}</div>
                                                             </div>
                                                             <br />
 
@@ -647,20 +658,6 @@ const AllMember = () => {
                 </div >
 
 
-
-                {/* <div className='flex gap-2 text-gray-500 my-10' >
-                            <span>Showing</span>
-                            {pagination.start}
-                            <span>to</span>
-                            {pagination.end}
-                            <span>of</span>
-                            <span>{data.data.foundUsers.length}</span>
-                            <span>entries</span>
-                        </div>
-
-                        <Pagination showPerPage={showPerPage} onPaginationChange={onPaginationChange}
-                            total={data.data.foundUsers.length}
-                        /> */}
 
 
                 {/* ================================= */}

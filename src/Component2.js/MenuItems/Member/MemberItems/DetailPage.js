@@ -3,9 +3,10 @@ import { FaArrowLeft } from "react-icons/fa";
 import { BsPrinterFill } from "react-icons/bs";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 
 const DetailPage = () => {
+    const navigate = useNavigate();
     const [open, setOpen] = useState(true);
     const [about, setAbout] = useState(true);
     const [Religion, setReligion] = useState(true)
@@ -26,10 +27,14 @@ const DetailPage = () => {
 
             <div className='flex gap-5 ' >
 
-                <button className='bg-[#4CC3D9] p-2 flex items-center gap-3 text-white' >
+
+                <button
+                    onClick={() => navigate("/dash/all_member")}
+                    className='bg-[#4CC3D9] p-2 flex items-center gap-3 text-white' >
                     <span><FaArrowLeft /></span>
                     Back To List
                 </button>
+
 
                 <div className='p-1  flex items-center gap-3 text-gray-500 ' >
                     <span
@@ -259,7 +264,7 @@ const DetailPage = () => {
             {/* About */}
             <div className='flex p-5  bg-[#0099cc] text-white font-bold text-xl items-center justify-between my-3 ' >
                 <div>
-                    About Us
+                    About
                 </div>
                 <span
                     onClick={() => setAbout(!about)}
@@ -269,8 +274,156 @@ const DetailPage = () => {
                 </span>
             </div>
             <div className={` ${about ? "block" : "hidden"} grid lg:grid-cols-2 border shadow-md text-gray-600 capitalize font-semibold duration-300`} >
-                About
+
+
+                <div className='lg:shadow-xl p-3'>
+                    <div
+                        className='lg:border lg:shadow-lg  p-3  overflow-auto'
+                    >
+                        <div className='grid grid-cols-3 '>
+                            <div>gender</div>
+                            <div
+                                className='place-content-center grid '
+                            >:</div>
+                            {/* <div>{value.gender}</div> */}
+                            <div>male</div>
+                        </div>
+                        <br />
+
+                        <div className='grid grid-cols-3'>
+                            <div>Mobile</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            {/* <div>{value.phone}</div> */}
+                            <div>898989898</div>
+                        </div>
+                        <br />
+
+                        <div className='grid grid-cols-3'>
+                            <div>name</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>Roshan Rana</div>
+                        </div>
+                        <br />
+                        <div className='grid grid-cols-3'>
+                            <div>Birthday</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>9th april 1995</div>
+                        </div>
+                        <br />
+                        <div className='grid grid-cols-3'>
+                            <div>age</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>27</div>
+                        </div>
+                        <br />
+                        <div className='grid grid-cols-3'>
+                            <div>Marital Status</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>unmarried</div>
+                        </div>
+                        <br />
+                        <div className='grid grid-cols-3'>
+                            <div>Eating</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>vejitarian</div>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+
+
+                {/* right */}
+                <div className='shadow-xl p-3'>
+                    <div
+                        className='lg:border lg:shadow-lg  p-3  overflow-auto'
+                    >
+                        <div className='grid grid-cols-3 '>
+                            <div>smoking</div>
+                            <div
+                                className='place-content-center grid '
+                            >:</div>
+                            {/* <div>{value.gender}</div> */}
+                            <div>No</div>
+                        </div>
+                        <br />
+
+                        <div className='grid grid-cols-3'>
+                            <div>Drinking</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>No</div>
+                        </div>
+                        <br />
+
+                        <div className='grid grid-cols-3'>
+                            <div>height</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>5'5</div>
+                        </div>
+                        <br />
+                        <div className='grid grid-cols-3'>
+                            <div>weight</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>68</div>
+                        </div>
+                        <br />
+                        <div className='grid grid-cols-3'>
+                            <div>body Type</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>slim</div>
+                        </div>
+                        <br />
+                        <div className='grid grid-cols-3'>
+                            <div>Skin Type</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>Fair</div>
+                        </div>
+                        <br />
+
+                    </div>
+
+
+
+
+
+                </div>
+
             </div>
+
+
+
 
 
             {/* Religious Information  */}
@@ -286,8 +439,60 @@ const DetailPage = () => {
                 </span>
             </div>
             <div className={` ${Religion ? "block" : "hidden"} grid lg:grid-cols-2 border shadow-md text-gray-600 capitalize font-semibold duration-300`} >
-                Religion
+
+                <div className='shadow-xl p-3'>
+                    <div
+                        className='lg:border lg:shadow-lg  p-3  overflow-auto'
+                    >
+                        <div className='grid grid-cols-3 '>
+                            <div>Religion</div>
+                            <div
+                                className='place-content-center grid '
+                            >:</div>
+                            <div>Sindhi</div>
+
+                        </div>
+                        <br />
+
+                        <div className='grid grid-cols-3'>
+                            <div> Caste</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>Hindu</div>
+                        </div>
+                        <br />
+
+                        <div className='grid grid-cols-3'>
+                            <div>Sub-casts</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>Rana</div>
+                        </div>
+                        <br />
+                        <div className='grid grid-cols-3'>
+                            <div>Manglik</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>No</div>
+                        </div>
+                        <br />
+
+                    </div>
+
+
+
+
+
+                </div>
+
             </div>
+
 
             {/* Loaction Information  */}
 
@@ -303,7 +508,61 @@ const DetailPage = () => {
                 </span>
             </div>
             <div className={` ${Loaction ? "block" : "hidden"} grid lg:grid-cols-2 border shadow-md text-gray-600 capitalize font-semibold duration-300`} >
-                Location
+
+                <div className='lg:shadow-xl p-3'>
+                    <div
+                        className='lg:border lg:shadow-lg  p-3  overflow-auto'
+                    >
+                        <div className='grid grid-cols-3 '>
+                            <div>Current Address</div>
+                            <div
+                                className='place-content-center grid '
+                            >:</div>
+                            {/* <div>{value.gender}</div> */}
+                            <div>234-3A saket nagar</div>
+                        </div>
+                        <br />
+
+                        <div className='grid grid-cols-3'>
+                            <div>Country</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            {/* <div>{value.phone}</div> */}
+                            <div>India</div>
+                        </div>
+                        <br />
+
+                        <div className='grid grid-cols-3'>
+                            <div>State</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>Madhya Pradesh</div>
+                        </div>
+                        <br />
+                        <div className='grid grid-cols-3'>
+                            <div>City</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>Bhopal</div>
+                        </div>
+                        <br />
+                        <div className='grid grid-cols-3 '>
+                            <div>Home Town</div>
+                            <div
+                                className='place-content-center grid '
+                            >:</div>
+                            {/* <div>{value.gender}</div> */}
+                            <div>Neapl (Gorkha)</div>
+                        </div>
+                        <br />
+                    </div>
+                </div>
             </div>
 
             {/* Contact Information  */}
@@ -320,7 +579,33 @@ const DetailPage = () => {
             </div>
 
             <div className={` ${contact ? "block" : "hidden"} grid lg:grid-cols-2 border shadow-md text-gray-600 capitalize font-semibold duration-300`} >
-                Contact
+                <div className='lg:shadow-xl p-3'>
+                    <div
+                        className='lg:border lg:shadow-lg  p-3  overflow-auto'
+                    >
+                        <div className='grid grid-cols-3 '>
+                            <div>Email(Username)</div>
+                            <div
+                                className='place-content-center grid '
+                            >:</div>
+                            <div>ranaroshan763@gmail.com</div>
+                        </div>
+                        <br />
+
+                        <div className='grid grid-cols-3'>
+                            <div>Phone</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>78787878778</div>
+                        </div>
+                        <br />
+
+
+                    </div>
+                </div>
+
             </div>
 
 
@@ -338,7 +623,62 @@ const DetailPage = () => {
             </div>
 
             <div className={` ${Education ? "block" : "hidden"} grid lg:grid-cols-2 border shadow-md text-gray-600 capitalize font-semibold duration-300`} >
-                Education
+
+                <div className='lg:shadow-xl p-3'>
+                    <div
+                        className='lg:border lg:shadow-lg  p-3  overflow-auto'
+                    >
+                        <div className='grid grid-cols-3 '>
+                            <div>Highest Qualification</div>
+                            <div
+                                className='place-content-center grid '
+                            >:</div>
+                            {/* <div>{value.gender}</div> */}
+                            <div>Graduation</div>
+                        </div>
+                        <br />
+
+                        <div className='grid grid-cols-3'>
+                            <div>Working Sector</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            {/* <div>{value.phone}</div> */}
+                            <div>It Sector</div>
+                        </div>
+                        <br />
+
+                        <div className='grid grid-cols-3'>
+                            <div>Company</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>Umpteen invation</div>
+                        </div>
+                        <br />
+                        <div className='grid grid-cols-3'>
+                            <div>Designation</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>Web Developer</div>
+                        </div>
+                        <br />
+                        <div className='grid grid-cols-3'>
+                            <div>Annual Income</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>N/A</div>
+                        </div>
+                        <br />
+
+                    </div>
+                </div>
             </div>
 
             {/* Family Details  */}
@@ -354,7 +694,88 @@ const DetailPage = () => {
                 </span>
             </div>
             <div className={` ${family ? "block" : "hidden"} grid lg:grid-cols-2 border shadow-md text-gray-600 capitalize font-semibold duration-300`} >
-                family
+                <div className='lg:shadow-xl p-3'>
+                    <div
+                        className='lg:border lg:shadow-lg  p-3  overflow-auto'
+                    >
+                        <div className='grid grid-cols-3 '>
+                            <div>Father Status</div>
+                            <div
+                                className='place-content-center grid '
+                            >:</div>
+                            {/* <div>{value.gender}</div> */}
+                            <div>South Eastern Coalfields Limited </div>
+                        </div>
+                        <br />
+
+                        <div className='grid grid-cols-3'>
+                            <div>Mother Status</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>homemaker</div>
+                        </div>
+                        <br />
+
+                        <div className='grid grid-cols-3'>
+                            <div>Brothers</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>one</div>
+                        </div>
+                        <br />
+                        <div className='grid grid-cols-3'>
+                            <div>Brother Married</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>Yes</div>
+                        </div>
+                        <br />
+                        <div className='grid grid-cols-3'>
+                            <div>Brothers Un-married</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>N/A</div>
+                        </div>
+                        <br />
+                        <div className='grid grid-cols-3'>
+                            <div>Sisters</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>one</div>
+                        </div>
+                        <br />
+                        <div className='grid grid-cols-3'>
+                            <div>Sistar Married</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>Yes</div>
+                        </div>
+                        <br />
+                        <div className='grid grid-cols-3'>
+                            <div>Sister Un-married</div>
+
+                            <div
+                                className='place-content-center grid'
+                            >:</div>
+                            <div>N/A</div>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+
+
             </div>
 
 

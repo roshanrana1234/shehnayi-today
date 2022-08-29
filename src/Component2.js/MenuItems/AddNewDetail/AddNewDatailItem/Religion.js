@@ -31,6 +31,11 @@ const Religion = () => {
     // get data
     const { isLoading, isError, error, data } = AddNewDetails()
     console.log(data);
+    if (data) {
+        data && data.data && data.data?.map((e) => {
+            console.log(e);
+        })
+    }
 
     const onSuccess = () => {
         navigate("/dash/religion")
@@ -86,28 +91,42 @@ const Religion = () => {
         // },
         {
             name: "Delete",
-            cell: row => (
-                <Link to={`/dash/religion/delete/${row._id}`} >
-                    <button
-                        className='bg-[#FF5858] rounded-lg p-3 flex gap-2  flex-shrink-0 w-24 justify-center items-center text-white' >
-                        <AiFillDelete />
-                        Delete
+            cell: row => row && row.Religions.map(({ _id }) => {
+                return <div>
+                    <Link to={`/dash/religion/delete/${_id}`} >
+                        <button
+                            className='bg-[#FF5858] rounded-lg p-3 flex gap-2  flex-shrink-0 w-24 justify-center items-center text-white' >
+                            <AiFillDelete />
+                            Delete
 
-                    </button>
-                </Link>
-            )
+                        </button>
+
+                    </Link>
+                    {console.log(_id)}
+
+                </div>
+            })
+            // (
+            //     <Link to={`/dash/religion/delete/${row._id}`} >
+            //         <button
+            //             className='bg-[#FF5858] rounded-lg p-3 flex gap-2  flex-shrink-0 w-24 justify-center items-center text-white' >
+            //             <AiFillDelete />
+            //             Delete
+
+            //         </button>
+            //     </Link>
+            // )
 
         },
 
 
         {
             name: 'Religion Name',
-
-
             selector: row => row && row.Religions.map((e) => {
                 return <div>
-                    {console.log(e._id)}
+                    {console.log(e)}
                     {e.ReligionName}
+
                 </div>
             })
 

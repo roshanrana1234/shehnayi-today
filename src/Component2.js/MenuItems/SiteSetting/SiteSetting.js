@@ -49,6 +49,11 @@ const SiteSetting = ({ data }) => {
                         <a href="#">Email</a>
                     </Link>
                     <Link
+                        to="about_us"
+                        className='hover:text-white pt-2 ' >
+                        <a href="#">About Us</a>
+                    </Link>
+                    <Link
                         to="setting"
                         className='hover:text-white pt-2 ' >
                         <a href="#">Basic Site Setting</a>
