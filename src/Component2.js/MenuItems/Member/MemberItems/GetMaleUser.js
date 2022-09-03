@@ -4,13 +4,11 @@ import { ImFilter } from "react-icons/im";
 import { AiFillDelete } from "react-icons/ai";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import { Link } from 'react-router-dom'
-import { UseGetAllMember, UseGetLeadGeneration, UseMemberData } from '../../../../Hooks/UseData';
-import { createGlobalStyle } from 'styled-components';
 import Pagination from '../../../Pagination/Pagination';
+import { UseGetallMales } from '../../../../Hooks/UseData';
 
-
-
-const LeadGenerationpage = () => {
+const GetMaleUser = () => {
+    const [user, setuser] = useState([])
     const [query, setQuery] = useState('')
     const [toggleState, setToggleState] = useState(1)
     const [numofPages, setNumofPages] = useState(10)
@@ -20,17 +18,17 @@ const LeadGenerationpage = () => {
         start: 0,
         end: showPerPage,
     })
-
-
-
-    const { isLoading, isError, error, data } = UseGetLeadGeneration()
-
+    const { data, isLoading, error, isError } = UseGetallMales()
 
     if (data) {
         console.log(data);
         console.log(data.data);
     }
+    useEffect(() => {
+        setuser(data && data.data)
+    }, [])
 
+    // const keys = ["firstname", "city", "lastname", "username", "religion", "state", "country", "phone"]
     const keys = ["firstname", "city", "lastname", "religion", "username"]
 
     let search = (data) => {
@@ -53,7 +51,6 @@ const LeadGenerationpage = () => {
     if (isError) {
         return <h2>{error.message}</h2>
     }
-
     return (
         <>
 
@@ -105,6 +102,7 @@ const LeadGenerationpage = () => {
 
 
 
+
                 {/* Heading */}
 
                 <div className='overflow-auto flex border  lg:justify-evenly lg:overflow-hidden  font-semibold text-gray-500 mt-20' >
@@ -138,13 +136,37 @@ const LeadGenerationpage = () => {
 
                     <div className='my-5 ' >
                         {
-                            data && search(data.data) && search(data.data).slice(pagination.start, pagination.end).map((value, index) => {
+                            user && search(user) && search(user).slice(pagination.start, pagination.end).map((value, index) => {
+                                {/* data && data.data && data.data.slice(pagination.start, pagination.end).map((value, index) => { */ }
                                 return <div key={index}>
-
-
                                     <div className='bg-[#F5F5F5] grid py-4 border shadow-xl' >
                                         <div>
                                             <div className='grid lg:grid-cols-2 place-items-center'>
+
+                                                <div className='flex gap-10 text-gray-500 p-3 ' >
+
+                                                    {/* <input
+                                        className='border'
+                                        type="checkbox"
+                                        onChange={handleChange}
+                                        name={value._id}
+                                        checked={value?.isChecked || false}
+                                    /> */}
+
+                                                    <div>
+
+                                                        <div
+                                                            className='text-lg '
+                                                        >
+                                                            {value.firstname}({value._id})
+                                                        </div>
+
+
+
+                                                    </div>
+                                                </div>
+
+
                                                 <div className='bg-[#ffffff] w-10/12 m-auto flex items-center justify-center p-2 border' >
                                                     {
                                                         (value.activeStatus == 'APPROVED' ? (<button
@@ -171,6 +193,7 @@ const LeadGenerationpage = () => {
                                                     }
 
                                                 </div>
+
                                             </div>
 
                                             <div className='flex flex-col lg:flex-row items-center' >
@@ -189,70 +212,90 @@ const LeadGenerationpage = () => {
                                                             className='lg:border  p-3 lg:shadow-2xl overflow-auto'
                                                         >
                                                             <div className='grid grid-cols-3 '>
-                                                                <div>Address</div>
+                                                                <div>gender</div>
                                                                 <div
                                                                     className='place-content-center grid '
                                                                 >:</div>
-                                                                <div>{value.Address}</div>
+                                                                <div>{value.gender}</div>
                                                             </div>
                                                             <br />
 
                                                             <div className='grid grid-cols-3'>
-                                                                <div>Country</div>
+                                                                <div>Mobile</div>
 
                                                                 <div
                                                                     className='place-content-center grid'
                                                                 >:</div>
-                                                                <div>{value.Country}</div>
+                                                                <div>{value.phone}</div>
                                                             </div>
                                                             <br />
 
                                                             <div className='grid grid-cols-3'>
-                                                                <div>Email</div>
+                                                                <div>Religion Name</div>
 
                                                                 <div
                                                                     className='place-content-center grid'
                                                                 >:</div>
-                                                                <div> {value.Email} </div>
+                                                                <div> {value.religion} </div>
                                                             </div>
                                                             <br />
                                                             <div className='grid grid-cols-3'>
-                                                                <div>Interest</div>
+                                                                <div>Caste Name</div>
 
                                                                 <div
                                                                     className='place-content-center grid'
                                                                 >:</div>
-                                                                <div>{value.Interest}</div>
+                                                                <div>{value.cast}</div>
                                                             </div>
                                                             <br />
                                                             <div className='grid grid-cols-3'>
-                                                                <div>Name</div>
+                                                                <div>Mother Tongue</div>
 
                                                                 <div
                                                                     className='place-content-center grid'
                                                                 >:</div>
-
-                                                                <div> {value.Name} </div>
+                                                                Mother toung not given
+                                                                {/* <div> {value.BasicInformation.motherTongue} </div> */}
                                                             </div>
                                                             <br />
                                                             <div className='grid grid-cols-3'>
-                                                                <div>PhoneNo1</div>
+                                                                <div>Marital Status</div>
 
                                                                 <div
                                                                     className='place-content-center grid'
                                                                 >:</div>
-                                                                <div>{value.PhoneNo1}</div>
+                                                                Marital Status Not given
+                                                                {/* <div>{value.BasicInformation.maritalStatus}</div> */}
                                                             </div>
                                                             <br />
                                                             <div className='grid grid-cols-3'>
-                                                                <div>PhoneNo2</div>
+                                                                <div>Assing To Staff</div>
 
                                                                 <div
                                                                     className='place-content-center grid'
                                                                 >:</div>
-                                                                <div>{value.PhoneNo2}</div>
+                                                                <div>{value.assignedTo}</div>
                                                             </div>
+                                                            <br />
+                                                            <div className='grid grid-cols-3'>
+                                                                <div>Plan Name</div>
 
+                                                                <div
+                                                                    className='place-content-center grid'
+                                                                >:</div>
+                                                                <div>Plan not given</div>
+                                                                {/* <div>{value.planname}</div> */}
+                                                            </div>
+                                                            <br />
+                                                            <div className='grid grid-cols-3'>
+                                                                <div>Plan Expired On</div>
+
+                                                                <div
+                                                                    className='place-content-center grid'
+                                                                >:</div>
+                                                                <div>not given</div>
+                                                                {/* <div>{value.planeexpire}</div> */}
+                                                            </div>
                                                             <br />
 
 
@@ -260,7 +303,101 @@ const LeadGenerationpage = () => {
 
 
 
+                                                        <div
+                                                            className='lg:border p-3 lg:shadow-2xl box-border overflow-auto'
+                                                        >
+                                                            <div className='grid grid-cols-3 '>
+                                                                <div>Email</div>
+                                                                <div
+                                                                    className='place-content-center grid '
+                                                                >:</div>
+                                                                <div>{value.username}{value.lastname}</div>
+                                                            </div>
+                                                            <br />
 
+                                                            <div className='grid grid-cols-3'>
+                                                                <div>Country Name</div>
+
+                                                                <div
+                                                                    className='place-content-center grid'
+                                                                >:</div>
+
+                                                                <div>{value.country}</div>
+                                                            </div>
+                                                            <br />
+
+                                                            <div className='grid grid-cols-3'>
+                                                                <div>State Name</div>
+
+                                                                <div
+                                                                    className='place-content-center grid'
+                                                                >:</div>
+                                                                <div>not given</div>
+                                                                {/* <div>{value.BasicInformation.state}</div> */}
+                                                            </div>
+                                                            <br />
+                                                            <div className='grid grid-cols-3'>
+                                                                <div>City Name</div>
+
+                                                                <div
+                                                                    className='place-content-center grid'
+                                                                >:</div>
+
+                                                                <div>{value.city}</div>
+                                                            </div>
+                                                            <br />
+
+                                                            <div className='grid grid-cols-3'>
+                                                                <div> Name BirthDay</div>
+
+                                                                <div
+                                                                    className='place-content-center grid'
+                                                                >:</div>
+                                                                <div className='flex gap-3' >
+
+                                                                    <div> {value.birthday && value.birthday.day}</div>
+                                                                    <div> {value.birthday && value.birthday.month}</div>
+                                                                    <div> {value.birthday && value.birthday.year}</div>
+                                                                </div>
+
+                                                            </div>
+                                                            <br />
+
+                                                            <br />
+                                                            <div className='grid grid-cols-3'>
+                                                                <div>Registered On</div>
+
+                                                                <div
+                                                                    className='place-content-center grid'
+                                                                >:</div>
+                                                                <div>{value.registeredDate}</div>
+                                                            </div>
+                                                            <br />
+                                                            <div className='grid grid-cols-3'>
+                                                                <div>Assign To Franchise</div>
+
+                                                                <div
+                                                                    className='place-content-center grid'
+                                                                >:</div>
+                                                                <div>not given</div>
+                                                                {/* <div>{value.Assigntofranchise}</div> */}
+                                                            </div>
+                                                            <br />
+                                                            <div className='grid grid-cols-3'>
+                                                                <div>Last Login</div>
+
+                                                                <div
+                                                                    className='place-content-center grid'
+                                                                >:</div>
+                                                                not given
+                                                                {/* <div>{value.lastlogin}</div> */}
+                                                            </div>
+                                                            <br />
+
+                                                            <br />
+
+
+                                                        </div>
 
 
                                                     </div>
@@ -323,7 +460,6 @@ const LeadGenerationpage = () => {
 
 
                                     </div >
-
                                 </div >
                             })
                         }
@@ -351,7 +487,45 @@ const LeadGenerationpage = () => {
 
 
 
+                {/* ================================= */}
 
+                <div div
+                    className={toggleState === 2 ? "active-content" : "content"}>
+
+                    <div className='paper' >
+                        <div className='text-red-700 p-3 bg-red-200'>
+                            Please fill Basic detail first
+                        </div>
+                    </div>
+                </div >
+
+                <div
+                    className={toggleState === 3 ? "active-content" : "content"}>
+                    <div className='paper' >
+                        <div className='text-red-700 p-3 bg-red-200'>
+                            Please fill Basic detail first
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    className={toggleState === 4 ? "active-content" : "content"}>
+                    <div className='paper' >
+                        <div className='text-red-700 p-3 bg-red-200'>
+                            Please fill Basic detail first
+                        </div>
+                    </div>
+                </div>
+                <div
+                    className={toggleState === 5 ? "active-content" : "content"}>
+                    <div className='paper' >
+                        <div className='text-red-700 p-3 bg-red-200'>
+                            Please fill Basic detail first
+                        </div>
+                    </div>
+                </div>
+
+                {/* ================================= */}
 
 
 
@@ -363,4 +537,4 @@ const LeadGenerationpage = () => {
     )
 }
 
-export default LeadGenerationpage
+export default GetMaleUser

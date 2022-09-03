@@ -273,6 +273,51 @@ export const UseGetAboutUs = (onSuccess) => {
         onSuccess
     })
 }
+
+const Getallmales = () => {
+    return request({ url: "/api/v2/admin/dashboard/male" })
+}
+export const UseGetallMales = (onSuccess) => {
+    return useQuery(["Admin_All_Member"], Getallmales, {
+        onSuccess
+    })
+}
+
+const GetallFemales = () => {
+    return request({ url: "/api/v2/admin/dashboard/female" })
+}
+export const UseGetallFeMales = (onSuccess) => {
+    return useQuery(["Admin_All_Member"], GetallFemales, {
+        onSuccess
+    })
+}
+
+const Getallpaid = () => {
+    return request({ url: "/api/v2/admin/dashboard/paid" })
+}
+export const UseGetAllPaid = (onSuccess) => {
+    return useQuery(["Admin_Paid"], Getallpaid, {
+        onSuccess
+    })
+}
+
+const Getallactiveuser = () => {
+    return request({ url: "/api/v2/admin/dashboard/active" })
+}
+export const UseGetAllactiveusers = (onSuccess) => {
+    return useQuery(["Admin_Active_users"], Getallactiveuser, {
+        onSuccess
+    })
+}
+
+const GetallLeadGeneration = () => {
+    return request({ url: "/api/v2/admin/leadGeneration" })
+}
+export const UseGetLeadGeneration = (onSuccess) => {
+    return useQuery(["Admin_Active_users"], GetallLeadGeneration, {
+        onSuccess
+    })
+}
 // ==============================================================
 // Put
 

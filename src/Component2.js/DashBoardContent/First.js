@@ -6,7 +6,7 @@ import { FaFemale } from "react-icons/fa";
 import { TiGroup } from "react-icons/ti";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import { MdGroups } from "react-icons/md";
-
+import { Link } from 'react-router-dom';
 
 
 const First = ({ response }) => {
@@ -102,9 +102,11 @@ const First = ({ response }) => {
                 <div className="bg-[#ffffff] p-3 shadow-md" >
                     <div className='flex gap-4 items-center ' >
 
-                        <div className='h-12 w-12 ' >
-                            <FaMale className='h-full w-full rounded-full bg-blue-600 text-white p-3' />
-                        </div>
+                        <Link to='/dash/all_member/maleusers' >
+                            <div className='h-12 w-12 ' >
+                                <FaMale className='h-full w-full rounded-full bg-blue-600 text-white p-3' />
+                            </div>
+                        </Link>
 
                         <div className='flex 
                    flex-col ' >
@@ -122,10 +124,12 @@ const First = ({ response }) => {
                     <div className='flex gap-4 items-center ' >
 
                         <div className='h-12 w-12 ' >
-                            <div className='h-12 w-12 ' >
-                                < FaFemale className='h-full w-full rounded-full bg-blue-600 text-white p-3' />
-                            </div>
+                            <Link to="/dash/all_member/femaleuser" >
+                                <div className='h-12 w-12 ' >
+                                    < FaFemale className='h-full w-full rounded-full bg-blue-600 text-white p-3' />
+                                </div>
 
+                            </Link>
                         </div>
 
                         <div className='flex 
@@ -143,9 +147,11 @@ const First = ({ response }) => {
                 <div className="bg-[#ffffff] p-3 shadow-md" >
                     <div className='flex gap-4 items-center ' >
 
-                        <div className='h-12 w-12 ' >
-                            <TiGroup className='h-full w-full rounded-full bg-blue-600 text-white p-3' />
-                        </div>
+                        <Link to="/dash/all_member/allactiveusers" >
+                            <div className='h-12 w-12 ' >
+                                <TiGroup className='h-full w-full rounded-full bg-blue-600 text-white p-3' />
+                            </div>
+                        </Link>
 
 
                         <div className='flex 
@@ -163,9 +169,11 @@ const First = ({ response }) => {
                 <div className="bg-[#ffffff] p-3 shadow-md" >
                     <div className='flex gap-4 items-center ' >
 
-                        <div className='h-12 w-12 ' >
-                            <FaRegMoneyBillAlt className='h-full w-full rounded-full bg-blue-600 text-white p-3' />
-                        </div>
+                        <Link to="/dash/all_member/paiduser" >
+                            <div className='h-12 w-12 ' >
+                                <FaRegMoneyBillAlt className='h-full w-full rounded-full bg-blue-600 text-white p-3' />
+                            </div>
+                        </Link>
 
                         <div className='flex 
                    flex-col ' >

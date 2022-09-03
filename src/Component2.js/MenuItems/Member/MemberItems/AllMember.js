@@ -11,7 +11,6 @@ import Pagination from '../../../Pagination/Pagination';
 
 
 const AllMember = () => {
-    const [user, setuser] = useState([])
     const [query, setQuery] = useState('')
     const [toggleState, setToggleState] = useState(1)
     const [numofPages, setNumofPages] = useState(10)
@@ -28,9 +27,7 @@ const AllMember = () => {
         console.log(data);
         console.log(data.data);
     }
-    useEffect(() => {
-        setuser(data && data.data)
-    }, [])
+
 
     // const keys = ["firstname", "city", "lastname", "username", "religion", "state", "country", "phone"]
     const keys = ["firstname", "city", "lastname", "religion", "username"]
@@ -56,20 +53,20 @@ const AllMember = () => {
         return <h2>{error.message}</h2>
     }
 
-    const handlepages = () => {
-        setShowPerPage(numofPages)
-    }
-    const handleChange = (e) => {
-        const { name, checked } = e.target;
-        if (name === "allSelect") {
-            let tempUser = user.map(value => { return { ...value, isChecked: checked } })
-            setuser(tempUser)
-        } else {
-            let tempUser = user && user.map((value) => value._id === name ? { ...value, isChecked: checked } : value)
-            setuser(tempUser)
+    // const handlepages = () => {
+    //     setShowPerPage(numofPages)
+    // }
+    // const handleChange = (e) => {
+    //     const { name, checked } = e.target;
+    //     if (name === "allSelect") {
+    //         let tempUser = user.map(value => { return { ...value, isChecked: checked } })
+    //         setuser(tempUser)
+    //     } else {
+    //         let tempUser = user && user.map((value) => value._id === name ? { ...value, isChecked: checked } : value)
+    //         setuser(tempUser)
 
-        }
-    }
+    //     }
+    // }
 
     return (
         <>
@@ -122,7 +119,8 @@ const AllMember = () => {
                 </div>
 
                 {/* Select All */}
-                <div className='flex text-gray-500 py-4' >
+
+                {/* <div className='flex text-gray-500 py-4' >
 
                     <div className='flex gap-4 p-4 rounded-lg border' >
                         <input type="checkbox"
@@ -132,10 +130,11 @@ const AllMember = () => {
                         />
                         <label htmlFor="">Select All</label>
                     </div>
-                </div>
+                </div> */}
+
 
                 {/* Four Button */}
-                <div className='grid sm:grid-cols-4 gap-2 text-white place-items-center' >
+                {/* <div className='grid sm:grid-cols-4 gap-2 text-white place-items-center' >
                     <div className='flex gap-3 items-center p-3 bg-[#FF5858]  
                         rounded-lg' >
                         <span><AiFillDelete /></span>
@@ -150,7 +149,7 @@ const AllMember = () => {
                     <button
                         className='bg-[#FF5858] p-3 rounded-lg'
                     >Suspended</button>
-                </div>
+                </div> */}
 
 
                 {/* Assign Staff */}
@@ -204,7 +203,7 @@ const AllMember = () => {
 
 
                 {/* new */}
-                <div className='grid sm:grid-cols-2 py-6 place-items-center gap-6 my-10' >
+                {/* <div className='grid sm:grid-cols-2 py-6 place-items-center gap-6 my-10' >
 
                     <div className='flex gap-4' >
                         <span>Show</span>
@@ -244,14 +243,14 @@ const AllMember = () => {
                     </div>
 
 
-                </div>
+                </div> */}
 
 
                 {/* Heading */}
 
-                <div className='overflow-auto flex border  lg:justify-evenly lg:overflow-hidden  font-semibold text-gray-500 ' >
+                <div className='overflow-auto flex border  lg:justify-evenly lg:overflow-hidden  font-semibold text-gray-500 mt-20' >
 
-                    <div className='flex flex-1 flex-col   gap-1 items-center  min-w-[200px]' >
+                    <div className='flex flex-1 flex-col   gap-1 items-center  min-w-[200px] ' >
                         <button
                             className={`${toggleState === 1 ? "active-tabs1" : "tabs"} w-full p-4 border-x-2`}
                             onClick={() => toggleTab(1)}
@@ -337,7 +336,7 @@ const AllMember = () => {
 
                     <div className='my-5 ' >
                         {
-                            user && search(user) && search(user).slice(pagination.start, pagination.end).map((value, index) => {
+                            data && search(data.data) && search(data.data).slice(pagination.start, pagination.end).map((value, index) => {
                                 {/* data && data.data && data.data.slice(pagination.start, pagination.end).map((value, index) => { */ }
                                 return <div key={index}>
                                     <div className='bg-[#F5F5F5] grid py-4 border shadow-xl' >
@@ -346,13 +345,13 @@ const AllMember = () => {
 
                                                 <div className='flex gap-10 text-gray-500 p-3 ' >
 
-                                                    <input
+                                                    {/* <input
                                                         className='border'
                                                         type="checkbox"
                                                         onChange={handleChange}
                                                         name={value._id}
                                                         checked={value?.isChecked || false}
-                                                    />
+                                                    /> */}
 
                                                     <div>
 
@@ -606,6 +605,33 @@ const AllMember = () => {
                                                 </div>
                                             </div >
 
+
+                                            <div className='grid lg:grid-cols-4 sm:grid-cols-2 gap-3  p-4  ' >
+                                                <Link to="/dash/all_member/detail/:memberid"
+                                                    target="_blank"
+                                                    className=' duration-300 hover:scale-105 hover:bg-blue-400  bg-red-500 p-2 rounded-lg  text-white flex justify-center'
+                                                >
+                                                    <button
+                                                        //   onClick={handleDelete}
+                                                        className='flex items-center gap-3'
+                                                    >
+                                                        <span><AiFillDelete /></span>
+                                                        Delete
+                                                    </button>
+                                                </Link>
+                                                <button
+                                                    className='duration-300 hover:scale-105  bg-green-500 p-2 rounded-lg text-white'
+                                                >Approved</button>
+                                                <button
+                                                    className='duration-300 hover:scale-105
+                                hover:bg-blue-600  bg-orange-400 p-2 rounded-lg text-white'
+                                                >UnApproved</button>
+                                                <button
+                                                    className='duration-300 hover:scale-105  bg-[#FFC65D] p-2 rounded-lg text-white'
+                                                >Suspended</button>
+
+                                            </div>
+
                                             <div className='grid lg:grid-cols-4 sm:grid-cols-2 gap-3  p-4  ' >
                                                 <Link to="/dash/all_member/detail/:memberid"
                                                     target="_blank"
@@ -629,6 +655,7 @@ const AllMember = () => {
                                                 >View Comment</button>
 
                                             </div>
+
                                         </div >
 
 

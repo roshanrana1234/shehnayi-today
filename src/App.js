@@ -126,6 +126,10 @@ import Flex from './Flex'
 import PopUpFollowUp from './PopUp/PopUpFollowUp'
 import SuspendedMember from './Component2.js/MenuItems/Member/MemberItems/SuspendedMember'
 import AboutUs from './Component2.js/MenuItems/SiteSetting/SiteSettingItem/AboutUs'
+import GetMaleUser from './Component2.js/MenuItems/Member/MemberItems/GetMaleUser'
+import GetFemaleuser from './Component2.js/MenuItems/Member/MemberItems/GetFemaleuser'
+import GetAllPaidmember from './Component2.js/MenuItems/Member/MemberItems/GetAllPaidmember'
+import GetAllActiveUsers from './Component2.js/MenuItems/Member/MemberItems/GetAllActiveUsers'
 
 // npx json-server --watch data/db.json --port 8000
 
@@ -249,6 +253,12 @@ const App = () => {
             <Route exact path='paid_spot' element={
 
               <PaidToSpotLite />} />
+            <Route exact path='/dash/all_member/maleusers' element={<GetMaleUser />} />
+            <Route exact path='/dash/all_member/femaleuser' element={<GetFemaleuser />} />
+            <Route exact path='/dash/all_member/paiduser' element={<GetAllPaidmember />} />
+            <Route exact path='/dash/all_member/allactiveusers' element={<GetAllActiveUsers />} />
+
+
             {/* Member End here */}
 
 
